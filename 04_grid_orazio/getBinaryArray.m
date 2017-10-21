@@ -1,0 +1,1 @@
+../tools/utilities/getBinaryArray.m
