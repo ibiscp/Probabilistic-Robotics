@@ -7,9 +7,6 @@ addpath '../tools/g2o_wrapper'
 addpath '../tools/visualization'
 source "../tools/utilities/geometry_helpers_2d.m"
 
-addpath "./exercise" % uncomment this line to target the exercise
-%addpath "./solution"
-
 %load your own dataset dataset
 [landmarks, poses, transitions, observations] = loadG2o('datasets/dataset_point.g2o');
 

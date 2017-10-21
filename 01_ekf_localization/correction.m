@@ -55,30 +55,31 @@ function [mu, sigma] = correction(mu, sigma, landmarks, observations)
     ly = current_land.y_pose;
 
     %where I should see that landmark
-    % t= %TODO;
-    % measure_prediction = %TODO;
+    t= [lx - mu_x; ly - mu_y];
+    measure_prediction = Rt * t;
 
     h_t(end+1,:) = measure_prediction(1);
     h_t(end+1,:) = measure_prediction(2);
 
     %compute its Jacobian
-    %C = [%TODO ];
-
+    C = [-Rt Rtp * t];
+    
     C_t(end+1,:) = C(1,:);
     C_t(end+1,:) = C(2,:);
   endfor
 
   %observation noise
   noise = 0.01;
-  %sigma_z = %TODO;
+  sigma_z = eye(2*num_landmarks_seen)*noise^2;
   
   %Kalman gain
-  %K = %TODO;
+  K = sigma * C_t' * (inv(C_t * sigma * C_t' + sigma_z));
 
   %update mu
-  %mu = %TODO;
+  error = z_t - h_t;
+  mu = mu + K * error;
 
   %update sigma
-  %sigma = %TODO;		
+  sigma = (eye(state_dim) - K * C_t) * sigma;		
 
 end

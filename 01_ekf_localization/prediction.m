@@ -21,7 +21,7 @@ function [mu, sigma] = prediction(mu, sigma, transition)
 	%it returns u = [ux, uy, utheta]. simply not consider uy
 
 	%predict mu // this is our f(x,u) function in the slides
-	mu = transition_model(mu, u); %TODO
+	mu = transition_model(mu, u);
 
 	mu_x = mu(1);
 	mu_y = mu(2);
@@ -34,20 +34,20 @@ function [mu, sigma] = prediction(mu, sigma, transition)
 	c = cos(mu_theta);
 
 	%Jacobian A
-	% A = [%TODO];
-
+	A = eye(3);
+  A(1:2, end) = [-u_x*s; u_x*c];
 
 	%Jacobian B
-	%B = [%TODO];
+	B = [c 0; s 0; 0 1];
 
 	%motion noise
 	noise = 0.1; 			%constant part	
 	v_noise = u_x^2;	 	%lin vel dependent part
 	w_noise = u_theta^2;		%ang vel dependent part
 
-	%sigma_u = [%TODO];
+	sigma_u = [noise + v_noise 0; 0 noise + w_noise];
 
 	%predict sigma
-	%sigma = %TODO;
+	sigma = A * sigma * A' + B * sigma_u * B';
 
 end
