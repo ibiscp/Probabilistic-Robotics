@@ -7,6 +7,9 @@ addpath '../tools/g2o_wrapper'
 addpath '../tools/visualization'
 source "../tools/utilities/geometry_helpers_2d.m"
 
+addpath "./exercise" % uncomment this line to target the exercise
+%addpath "./solution"
+
 %load your own dataset dataset
 [landmarks, poses, transitions, observations] = loadG2o('datasets/dataset_point.g2o');
 
@@ -15,6 +18,7 @@ source "../tools/utilities/geometry_helpers_2d.m"
 mu = rand(3,1)*20-10; 
 mu(3) = normalizeAngle(mu(3));
 printf('Random initial pose: [%f, %f, %f]\n', mu(1),mu(2), mu(3));
+printf('\n***************** Press [SPACE] to perform a step *****************\n');
 fflush(stdout);
 
 %init covariance
@@ -23,6 +27,7 @@ sigma = eye(3)*0.001;
 %init graphics
 figure(1); title("ekf-localization");
 plot_state(landmarks, mu);
+
 
 %simulation cycle
 for i=1:length(transitions)
@@ -37,8 +42,10 @@ for i=1:length(transitions)
 	fflush(stdout);	
 
 	%plot current situation
-	pause(.1)
-	plot_state(landmarks, mu, sigma, observations(i));
+	%pause()
+	%sigma multiplied factor [for visualization only!]
+  	% f = 5000;
+	plot_state(landmarks, mu, sigma*f, observations(i));
 	hold off;
 endfor
 
