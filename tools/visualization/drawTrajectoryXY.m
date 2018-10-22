@@ -8,7 +8,7 @@ function drawTrajectoryXY(trajectory_)
 	  y_begin = trajectory_(u, 2);
 	  x_end   = trajectory_(u+1, 1);
 	  y_end   = trajectory_(u+1, 2);
-    plot([x_begin x_end], [y_begin y_end], "b", "linewidth", 2);
+    plot([x_begin x_end], [y_begin y_end], "k", "linewidth", 2);
     hold on;
 	endfor
 endfunction
