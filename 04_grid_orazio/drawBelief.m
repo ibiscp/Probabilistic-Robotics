@@ -1,1 +1,0 @@
-../tools/visualization/drawBelief.m

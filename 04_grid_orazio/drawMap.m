@@ -1,1 +1,0 @@
-../tools/visualization/drawMap.m
