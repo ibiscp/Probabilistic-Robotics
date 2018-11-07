@@ -77,8 +77,8 @@ function [mu, sigma] = correction(mu, sigma, observations, id_to_state_map, stat
       landmark_position = mu(id_state:id_state+1,:);
 
       # Where I predict i will see that landmark 
-      delta_t            = [landmark_position(1) - mu_t(1); landmark_position(2) - mu_t(2)]
-      measure_prediction = Rt * delta_t
+      delta_t            = [landmark_position(1) - mu_t(1); landmark_position(2) - mu_t(2)];
+      measure_prediction = Rt * delta_t;
 
       # Add landmark measurement prediction
       h_t(end+1,:) = measure_prediction(1);
@@ -119,7 +119,7 @@ function [mu, sigma] = correction(mu, sigma, observations, id_to_state_map, stat
     mu         = mu + K*innovation;
 
     #update sigma
-    sigma = (eye(dimension_mu) - K * C_t) * sigma
+    sigma = (eye(dimension_mu) - K * C_t) * sigma;
     #            [2n+3x2n+3] [2n+3x2n][2nx2n+3][2n+3x2n+3]
     
   endif

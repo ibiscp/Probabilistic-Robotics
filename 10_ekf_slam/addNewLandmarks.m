@@ -62,7 +62,7 @@ function [mu, sigma, id_to_state_map, state_to_id_map] = addNewLandmarks(mu, sig
       #for simplicity we put a high value only in the diagonal.
       #A more deeper analysis on the initial noise should be made.
       initial_landmark_noise = 2;
-      sigma_landmark         = initial_landmark_noise*eye(2) #TODO: set landmark state covariance dimensions
+      sigma_landmark         = initial_landmark_noise*eye(2); # set landmark state covariance dimensions
 
       #adding the landmark covariance to the full covariance
       sigma(id_state,:)   = 0;
